@@ -22,7 +22,7 @@ CREDENTIALS = SignedJwtAssertionCredentials(
                  settings.SCOPE)
 
 
-def update():
+def update(args):
     gc = gspread.authorize(CREDENTIALS)
     gfile = gc.open_by_key(settings.DOC_ID)
     wsheet = gfile.worksheet(args['<sheet_name>'])
@@ -30,4 +30,4 @@ def update():
 
 if __name__ == '__main__':
     args = docopt(__doc__, version="0.0.1")
-    update()
+    update(args)
