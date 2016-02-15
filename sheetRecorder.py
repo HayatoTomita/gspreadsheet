@@ -3,7 +3,7 @@
 
 Record some values to GoogleSpreadSheet
 Usage:
-  sheetRecorder.py <sheet_number> <cell_number> <value> [options]
+  sheetRecorder.py <sheet_name> <cell_number> <value> [options]
 
 Options:
   -h --help                Show this screen.
@@ -25,11 +25,8 @@ CREDENTIALS = SignedJwtAssertionCredentials(
 def update():
     gc = gspread.authorize(CREDENTIALS)
     gfile = gc.open_by_key(settings.DOC_ID)
-    wsheet = gfile.get_worksheet(int(args['<sheet_number>']))
+    wsheet = gfile.worksheet(args['<sheet_name>'])
     wsheet.update_acell(args['<cell_number>'], args['<value>'])
-
-    for record in records:
-        print(record)
 
 if __name__ == '__main__':
     args = docopt(__doc__, version="0.0.1")
