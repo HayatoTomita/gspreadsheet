@@ -18,12 +18,16 @@ class GSpreadSheet:
         self.printStatus()
 
     def update(self, sheet_name, row, col, val):
+        wsheet = getWorkSheet(sheet_name)
+        wsheet.update_cell(row, col, val)
+        self.printStatus()
+
+    def getWorkSheet(self, sheet_name):
         try:
             wsheet = self.gfile.worksheet(sheet_name)
-            self.status = "update complete"
-        except gspread.WorksheetNotFound:
-            self.status = "worksheet not found"
-        wsheet.update_cell(row, col, val)
+            self.status = "get worksheet"
+        except gsprea.WorksheetNotFound:
+            self.status = "workseet not found"
         self.printStatus()
 
     def printStatus(self):
