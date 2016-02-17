@@ -27,10 +27,10 @@ class GSpreadSheet:
         self.status = "initialized"
         self.printStatus()
 
-    def connect(self, credentials):
+    def connect(self, credentials, doc_id):
         try:
             self.gc = gspread.authorize(credentials)
-            self.gfile = self.gc.open_by_key(settings.DOC_ID)
+            self.gfile = self.gc.open_by_key(doc_id)
             self.status = "connected"
         except gspread.AuthenticationError:
             self.status = "connection failed"
@@ -51,6 +51,6 @@ class GSpreadSheet:
 if __name__ == '__main__':
     args = docopt(__doc__, version="0.0.1")
     sheet = GSpreadSheet()
-    sheet.connect(CREDENTIALS)
+    sheet.connect(CREDENTIALS, settings.DOC_ID)
     sheet.update(args)
     print("finish")
