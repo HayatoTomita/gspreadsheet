@@ -17,13 +17,13 @@ class GSpreadSheet:
             self.status = "connection failed"
         self.printStatus()
 
-    def update(self, args):
+    def update(self, sheet_name, row, col, val):
         try:
-            wsheet = self.gfile.worksheet(args['<sheet_name>'])
+            wsheet = self.gfile.worksheet(sheet_name)
             self.status = "update complete"
         except gspread.WorksheetNotFound:
             self.status = "worksheet not found"
-        wsheet.update_cell(args['<row>'], args['<col>'], args['<value>'])
+        wsheet.update_cell(row, col, val)
         self.printStatus()
 
     def printStatus(self):

@@ -24,5 +24,9 @@ if __name__ == '__main__':
     args = docopt(__doc__, version="0.0.1")
     sheet = gspreadsheet.GSpreadSheet()
     sheet.connect(CREDENTIALS, settings.DOC_ID)
-    sheet.update(args)
+    sheet.update(
+        args['<sheet_name>'],
+        args['<row>'],
+        args['<col>'],
+        args['<value>'])
     print("finish")
