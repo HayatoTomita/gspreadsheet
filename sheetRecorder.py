@@ -22,12 +22,35 @@ CREDENTIALS = SignedJwtAssertionCredentials(
                  settings.SCOPE)
 
 
-def update(args):
-    gc = gspread.authorize(CREDENTIALS)
-    gfile = gc.open_by_key(settings.DOC_ID)
-    wsheet = gfile.worksheet(args['<sheet_name>'])
-    wsheet.update_acell(args['<cell_number>'], args['<value>'])
+class GSpreadSheet:
+    def __init__(self):
+        self.status = "initialized"
+        self.printStatus()
+
+    def connect(self, credentials):
+        try:
+            self.gc = gspread.authorize(credentials)
+            self.gfile = self.gc.open_by_key(settings.DOC_ID)
+            self.status = "connected"
+        except gspread.AuthenticationError:
+            self.status = "connection failed"
+        self.printStatus()
+
+    def update(self, args):
+        try:
+            wsheet = self.gfile.worksheet(args['<sheet_name>'])
+            self.status = "update complete"
+        except gspread.WorksheetNotFound:
+            self.status = "worksheet not found"
+        wsheet.update_acell(args['<cell_number>'], args['<value>'])
+        self.printStatus()
+
+    def printStatus(self):
+        print(self.status)
 
 if __name__ == '__main__':
     args = docopt(__doc__, version="0.0.1")
-    update(args)
+    sheet = GSpreadSheet()
+    sheet.connect(CREDENTIALS)
+    sheet.update(args)
+    print("finish")
