@@ -19,7 +19,11 @@ class GSpreadSheet:
 
     def update(self, sheet_name, row, col, val):
         wsheet = getWorkSheet(sheet_name)
-        wsheet.update_cell(row, col, val)
+        try:
+            wsheet.update_cell(row, col, val)
+            self.status = "update complete"
+        except gspread.UpdateCellError:
+            self.status = "update failed"
         self.printStatus()
 
     def getWorkSheet(self, sheet_name):
