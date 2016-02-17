@@ -39,5 +39,14 @@ Session.vim
 .netrwhist
 *~
 
+
+# Created by https://www.gitignore.io/api/py,ipythonnotebook
+
+#!! ERROR: py is undefined. Use list command to see defined gitignore types !!#
+
+### IPythonNotebook ###
+# Temporary data
+.ipynb_checkpoints/
+
 settings.py
-settings.pyc
+*.pyc
