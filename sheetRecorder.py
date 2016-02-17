@@ -3,7 +3,7 @@
 
 Record some values to GoogleSpreadSheet
 Usage:
-  sheetRecorder.py <sheet_name> <cell_number> <value> [options]
+  sheetRecorder.py <sheet_name> <row> <col> <value> [options]
 
 Options:
   -h --help                Show this screen.
@@ -42,7 +42,7 @@ class GSpreadSheet:
             self.status = "update complete"
         except gspread.WorksheetNotFound:
             self.status = "worksheet not found"
-        wsheet.update_acell(args['<cell_number>'], args['<value>'])
+        wsheet.update_cell(args['<row>'], args['<col>'], args['<value>'])
         self.printStatus()
 
     def printStatus(self):
