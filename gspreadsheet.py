@@ -52,7 +52,9 @@ class GSpreadSheet:
         except gspread.WorksheetNotFound:
             self.status = "workseet not found"
             self.printStatus()
-            return None
+            wsheet = self.gfile.add_worksheet(sheet_name,30,40)
+            self.status = "created new sheet"
+            return wsheet
 
     def printStatus(self):
         print(self.status)
