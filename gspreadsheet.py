@@ -38,6 +38,11 @@ class GSpreadSheet:
             self.printStatus()
             return None, None
 
+    def getRowList(self, sheet_name, num):
+        wsheet = self.getWorkSheet(sheet_name)
+        rowList = wsheet.row_values(num)
+        return rowList
+
     def getWorkSheet(self, sheet_name):
         try:
             wsheet = self.gfile.worksheet(sheet_name)
