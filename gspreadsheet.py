@@ -54,6 +54,7 @@ class GSpreadSheet:
             self.printStatus()
             wsheet = self.gfile.add_worksheet(sheet_name,30,40)
             self.status = "created new sheet"
+            self.printStatus()
             return wsheet
 
     def printStatus(self):
