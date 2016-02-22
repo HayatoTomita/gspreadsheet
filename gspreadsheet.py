@@ -57,5 +57,27 @@ class GSpreadSheet:
             self.printStatus()
             return wsheet
 
+    def createFromTemplate(self, sheet_name, template_name):
+        try:
+            self.status = "start to copy template sheet"
+            self.printStatus()
+            wsheet = self.gfile.add_worksheet(sheet_name,30,40)
+            template = self.getWorkSheet(template_name)
+            list = template.get_all_values()
+            row_len = len(list)
+            col_len = len(list[0])
+            end_cell = template.get_addr_int(row_len,col_len)
+            range_str = "A1:" + str(end_cell)
+            cell_list = template.range(range_str)
+            for i in cell_list:
+                if i.value == "":
+                     continue
+                wsheet.update_cell(i.row,i.col,i.value)
+
+        except gspread.WorksheetNotFound:
+            self.status = "template sheet not found"
+            self.printStatus()
+
+
     def printStatus(self):
         print(self.status)
