@@ -17,8 +17,7 @@ class GSpreadSheet:
             self.status = "connection failed"
         self.printStatus()
 
-    def update(self, sheet_name, row, col, val):
-        wsheet = self.getWorkSheet(sheet_name)
+    def update(self, wsheet, row, col, val):
         try:
             wsheet.update_cell(row, col, val)
             self.status = "update complete"
@@ -26,8 +25,7 @@ class GSpreadSheet:
             self.status = "update failed"
         self.printStatus()
 
-    def find(self, sheet_name, query):
-        wsheet = self.getWorkSheet(sheet_name)
+    def find(self, wsheet, query):
         try:
             cell = wsheet.find(query)
             self.status = "find in " + str(cell.row) + "," + str(cell.col)
@@ -38,8 +36,7 @@ class GSpreadSheet:
             self.printStatus()
             return None, None
 
-    def getRowList(self, sheet_name, num):
-        wsheet = self.getWorkSheet(sheet_name)
+    def getRowList(self, wsheet, num):
         rowList = wsheet.row_values(num)
         return rowList
 
