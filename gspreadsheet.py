@@ -67,6 +67,7 @@ class GSpreadSheet:
                 if i.value == "":
                      continue
                 wsheet.update_cell(i.row,i.col,i.value)
+            return wsheet
 
         except gspread.WorksheetNotFound:
             self.status = "template sheet not found"
