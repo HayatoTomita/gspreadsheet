@@ -1,4 +1,4 @@
-# sheetRecorder
+# gspreadsheet
 ## Enviroment
 * python (2.7)
 * gspread
