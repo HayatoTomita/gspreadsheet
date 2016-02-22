@@ -52,10 +52,7 @@ class GSpreadSheet:
         except gspread.WorksheetNotFound:
             self.status = "workseet not found"
             self.printStatus()
-            wsheet = self.gfile.add_worksheet(sheet_name,30,40)
-            self.status = "created new sheet"
-            self.printStatus()
-            return wsheet
+            return None
 
     def createFromTemplate(self, sheet_name, template_name):
         try:
